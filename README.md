@@ -96,16 +96,10 @@
         #togglePassword:hover {
             color: #ff4081;
         }
-        .register-link {
-            margin-top: 20px;
-        }
-        .register-link a {
-            color: #ff4081;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .register-link a:hover {
-            text-decoration: underline;
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -120,6 +114,19 @@
                 toggleButton.textContent = 'Show Password';
             }
         }
+
+        function validateLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (username === 'GT622x' && password === '124712') {
+                window.location.href = 'home.html';
+            } else {
+                errorMessage.textContent = 'Invalid Fan ID or PPcode';
+            }
+        }
     </script>
 </head>
 <body>
@@ -128,7 +135,7 @@
     <div class="main-container">
         <div class="login-container">
             <h2>Login</h2>
-            <form action="home.html" method="POST">
+            <form onsubmit="validateLogin(event)">
                 <div class="form-group">
                     <label for="username">Fan ID</label>
                     <input type="text" id="username" name="username" required>
@@ -141,10 +148,8 @@
                 <div class="form-group">
                     <button type="submit">Login</button>
                 </div>
+                <div id="errorMessage" class="error-message"></div>
             </form>
-            <div class="register-link">
-                <p>Don't have an account? <a href="register.html">Register here</a></p>
-            </div>
         </div>
     </div>
 </body>
